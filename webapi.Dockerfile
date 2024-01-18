@@ -6,7 +6,7 @@ RUN mkdir -p /src
 WORKDIR /src
 
 # Install dependencies
-RUN git clone https://github.com/industrial-optimization-group/desdeo-webapi
+RUN git clone https://github.com/industrial-optimization-group/desdeo-webapi.git
 
 WORKDIR /src/desdeo-webapi
 
