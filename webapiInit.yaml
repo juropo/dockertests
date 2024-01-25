@@ -2,7 +2,7 @@ apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
   name: webapiInit
-  namespace: desdeoswitch
+  namespace: dsd-test-project
   labels:
     app: webapiInit
 spec:

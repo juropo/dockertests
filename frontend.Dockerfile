@@ -1,4 +1,6 @@
-FROM node
+FROM node:18-alpine
+
+EXPOSE 3000
 
 RUN adduser node root && \
     mkdir -p /src
@@ -6,18 +8,16 @@ RUN adduser node root && \
 WORKDIR /src
 
 # Install dependencies
-RUN apt-get update && apt-get install -y && \
-    git clone https://github.com/giomara-larraga/desdeo-experiments.git 
+RUN apk add git && git clone https://github.com/industrial-optimization-group/desdeo-webui.git
 
-WORKDIR /src/desdeo-experiments
+WORKDIR /src/desdeo-webui
 
-RUN yarn install --network-timeout 800000
-RUN sed -i 's,127.0.0.1:5000,webapiroute-desdeoswitch.rahtiapp.fi/,' ./src/App.tsx
-
-RUN chmod -R 775 /src/desdeo-experiments
-RUN chown -R node:root /src/desdeo-experiments
-
+RUN sed -i 's,localhost:5000,desdeo-webapi-dsd-test-project.rahtiapp.fi,' ./src/lib/api.ts
+RUN npm install -g npm@latest && rm .npmrc && \
+    npm cache clean --force && npm install && npm run build && \
+    chmod -R 775 /src/desdeo-webui && \
+    chown -R node:root /src/desdeo-webui 
 
 USER 1000
 
-ENTRYPOINT [ "yarn", "react-scripts", "--openssl-legacy-provider", "start" ]
+ENTRYPOINT [ "npm", "run", "dev", "--", "--host", "--port", "3000" ]

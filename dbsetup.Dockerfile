@@ -9,7 +9,7 @@ RUN git clone -b rahti-deployment --single-branch https://github.com/juropo/desd
 
 WORKDIR /src/desdeo-webapi
 
-EXPOSE 5000
+# EXPOSE 5000
 
 #RUN python -mvenv .venv && \
 #    source .venv/bin/activate && \
@@ -20,4 +20,4 @@ RUN pip install -r requirements.txt && pip install psycopg2-binary && \
     chown -R node:root /src/desdeo-webapi
 
 
-ENTRYPOINT [ "python", "-m", "flask", "run", "--host=0.0.0.0" ]
+ENTRYPOINT [ "/bin/sh", "-c", "python add_exp_users.py --username user --N 1 && cat ./users_and_pass.csv" ]
