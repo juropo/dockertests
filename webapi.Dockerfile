@@ -5,11 +5,7 @@ RUN useradd node -g root && mkdir -p /src
 WORKDIR /src
 
 # Install dependencies
-<<<<<<< HEAD
 RUN git clone -b rahti-deployment --single-branch https://github.com/juropo/desdeo-webapi.git
-=======
-RUN git clone https://github.com/industrial-optimization-group/desdeo-webapi.git
->>>>>>> 5334d66857e873d41027e22547d5b2fcf4b40b18
 
 WORKDIR /src/desdeo-webapi
 
