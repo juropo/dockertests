@@ -20,4 +20,4 @@ RUN pip install -r requirements.txt && pip install psycopg2-binary && \
     chown -R node:root /src/desdeo-webapi
 
 
-ENTRYPOINT [ "/bin/sh", "-c", "python add_exp_users.py --username user --N 1 && cat ./users_and_pass.csv" ]
+ENTRYPOINT [ "/bin/sh", "-c", "python add_UTOPIA_users.py && cat ./users_and_pass.csv" ]

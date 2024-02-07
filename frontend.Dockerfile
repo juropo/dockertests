@@ -8,7 +8,7 @@ RUN adduser node root && \
 WORKDIR /src
 
 # Install dependencies
-RUN apk add git && git clone https://github.com/industrial-optimization-group/desdeo-webui.git
+RUN apk add git && git clone -b UTOPIA --single-branch https://github.com/industrial-optimization-group/desdeo-webui.git
 
 WORKDIR /src/desdeo-webui
 
