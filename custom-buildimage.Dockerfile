@@ -1,7 +1,7 @@
 FROM registry.access.redhat.com/ubi8/python-312
 
-# Install ca-certificates and necessary tools for updating trust
-RUN microdnf update && \
-    microdnf install ca-certificates && \
+# Update the system and install ca-certificates
+RUN dnf update -y && \
+    dnf install -y ca-certificates && \
     update-ca-trust && \
-    microdnf clean all
+    dnf clean all
