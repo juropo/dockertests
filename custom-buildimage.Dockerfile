@@ -9,5 +9,5 @@ RUN dnf update -y && \
     update-ca-trust && \
     dnf clean all
 
-# If necessary, switch back to a non-root user (if your app requires it)
+# Switch back to a non-root user
 USER 1001
