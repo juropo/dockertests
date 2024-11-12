@@ -1,0 +1,26 @@
+docker build -t api-builder-image -f custom-buildimage.Dockerfile .
+
+s2i build https://github.com/juropo/DESDEO.git api-builder-image desdeo-webapi:latest --ref utopia --env VAR1=value1 --env VAR2=value2
+
+oc login --token=sha256~xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx --server=https://api.2.rahti.csc.fi:6443
+(get this from rahti)
+
+docker login -p sha256~Pe-7jRGCvC6ojqkNJvk74_olVJOmAG2CsMPbNlwz_UA -u unused image-registry.apps.2.rahti.csc.fi
+
+docker tag desdeo-webapi:latest image-registry.apps.2.rahti.csc.fi/utopia/desdeo-webapi:latest
+
+docker push image-registry.apps.2.rahti.csc.fi/utopia/desdeo-webapi:latest
+
+
+
+
+# mcdm builder image commands
+
+docker build -t api-builder-image:latest -f custom-buildimage-with-ipopt.Dockerfile . 
+
+docker login -p sha256~xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -u unused image-registry.apps.2.rahti.csc.fi
+
+docker tag api-builder-image:latest image-registry.apps.2.rahti.csc.fi/euro-mcdm/api-builder-image:latest
+
+docker push image-registry.apps.2.rahti.csc.fi/euro-mcdm/api-builder-image:latest 
+
